@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import BooksApp from './App'
+import './css/index.css'
 
-ReactDOM.render( < App / > , document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render( < BooksApp / > , document.getElementById('root'))
