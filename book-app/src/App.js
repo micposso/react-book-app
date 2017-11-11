@@ -1,7 +1,6 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import './css/App.css';
-import {getAll} from './BooksAPI.js';
 
 class BooksApp extends React.Component {
   state = {
@@ -18,7 +17,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    getAll()
+    BooksAPI.getAll()
     .then(books => this.setState({books: books}))
     .catch(err => console.log('an err occured', err));
   }
