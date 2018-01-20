@@ -17,11 +17,24 @@ class BooksApp extends React.Component {
     read: []
   }
 
+  SearchBarAction = () => {
+    console.log("click")
+    if(this.state.showSearchPage === false) {
+      this.setState({
+        showSearchPage: true,
+      })
+    } else {
+      this.setState({
+        showSearchPage: false,
+      })
+    }
+  }
+
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-            <SearchComponent />
+            <SearchComponent activateSearch={this.SearchBarAction} />
         ) : (
           <div className="list-books">
             <div className="list-books-title">
@@ -182,7 +195,7 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <a onClick={this.SearchBarAction.bind(this)}>Add a book</a>
             </div>
           </div>
         )}
