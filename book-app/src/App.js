@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI'
 import CurrentlyReadingComponent from './components/CurrentlyReadingComponent'
 import WantToReadComponent from './components/WantToReadComponent'
 import ReadComponent from './components/ReadComponent'
+import './css/App.css'
 //import { getAll } from './BooksAPI.js';
 
 class BooksApp extends React.Component {
@@ -59,14 +60,6 @@ class BooksApp extends React.Component {
 }
 
 export default BooksApp
-
-
-
-<div className="bookshelf">
-<h2 className="bookshelf-title">All Books</h2>
-<div className="bookshelf-books">
-  
-  
 
   {/* <ol className="books-grid">
   {this.state.books ?
