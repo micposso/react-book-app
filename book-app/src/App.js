@@ -14,7 +14,7 @@ class BooksApp extends React.Component {
     showSearchPage: false,
     currentlyReading: [],
     wantToRead: [],
-    read: []
+    read: [],
   }
 
   SearchBarAction = () => {
