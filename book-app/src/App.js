@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI'
 import CurrentlyReadingComponent from './components/CurrentlyReadingComponent'
 import WantToReadComponent from './components/WantToReadComponent'
 import ReadComponent from './components/ReadComponent'
+import './css/App.css'
 //import { getAll } from './BooksAPI.js';
 
 class BooksApp extends React.Component {
@@ -33,11 +34,17 @@ class BooksApp extends React.Component {
     }
   }
 
+  componentDidMount() {
+    BooksAPI.getAll()
+    .then(books => this.setState({books: books}))
+    .catch(err => console.log('this is an error in the book API', err))
+  }
+
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-            <SearchComponent activateSearch={this.SearchBarAction} />
+            <SearchComponent books={this.state.books} activateSearch={this.SearchBarAction} />
         ) : (
           <div className="list-books">
             <div className="list-books-title">
@@ -60,48 +67,3 @@ class BooksApp extends React.Component {
 
 export default BooksApp
 
-
-
-<div className="bookshelf">
-<h2 className="bookshelf-title">All Books</h2>
-<div className="bookshelf-books">
-  
-  
-
-  {/* <ol className="books-grid">
-  {this.state.books ?
-  this.state.books.map((book, index) => 
-    <li key={index}>
-      <div className="book">
-        <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
-          <div className="book-shelf-changer">
-            <select name={book.title} onChange={(e) => {
-              e.persist();
-              console.log('vallllll  e', e);
-              this.setState({books: this.state.books.filter(book => book.title != e.target.name)}, () => {
-                let newState = {};
-                newState[e.target.value] = this.state[e.target.value].concat(book);
-                console.log('the new stateeeee', newState);
-                this.setState(newState);
-              });
-            }}>
-              <option value="none" disabled>Move to...</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
-          </div>
-        </div>
-        <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.authors.join(', ')}</div>
-      </div>
-    </li>
-  )
-    :
-    ''
-  }
-  </ol>
-</div>
-</div> */}
