@@ -38,9 +38,39 @@ class SearchComponent extends Component{
                         </div>
                     </div>
                 <div className="search-books-results">
-                    <ol className="books-grid">
-                        {/* add map script that renders all results books */ }     
-                    </ol>
+                <ol className="books-grid">
+                {this.props.bookList ?
+                this.props.bookList.map((book, index) => 
+                    <li key={index}>
+                        <div className="book">
+                        <div className="book-top">
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
+                            <div className="book-shelf-changer">
+                            <select name={book.title} onChange={(event) => {
+                                event.persist();
+                                this.setState({books: this.props.books.filter(book => book.title != event.target.name)}, () => {
+                                let newState = {};
+                                newState[event.target.value] = this.props[event.target.value].concat(book);
+                                this.setState(newState);
+                                });
+                            }}>
+                                <option value="none" disabled>Move to...</option>
+                                <option value="wantToRead">Want to Read</option>
+                                <option value="currentlyReading">Currently Reading</option>
+                                <option value="alreadyRead">Read</option>
+                                <option value="none">None</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div className="book-title">{book.title}</div>
+                        <div className="book-authors">{book.authors.join(', ')}</div>
+                        </div>
+                    </li>
+                    )
+                    :
+                    'No Books to display'
+                } 
+            </ol>
                 </div>
                 </div>
           </div>
