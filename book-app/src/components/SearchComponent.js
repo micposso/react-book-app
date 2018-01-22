@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 
 class SearchComponent extends Component{
@@ -18,7 +19,7 @@ class SearchComponent extends Component{
             <div>
                 <div className="search-books">
                     <div className="search-books-bar">
-                        <a className="close-search" onClick={() => this.props.activateSearch()}>Close</a>
+                        <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
                             {/*
                             NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -38,44 +39,10 @@ class SearchComponent extends Component{
                     </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.props.books ?
-                        this.props.books.map((book, index) => 
-                            <li key={index}>
-                                <div className="book">
-                                <div className="book-top">
-                                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
-                                    <div className="book-shelf-changer">
-                                    <select name={book.title} onChange={(event) => {
-                                        event.persist();
-                                        this.setState({books: this.props.books.filter(book => book.title != event.target.name)}, () => {
-                                        let newState = {};
-                                        newState[event.target.value] = this.props[event.target.value].concat(book);
-                                        this.setState(newState);
-                                        });
-                                    }}>
-                                        <option value="none" disabled>Move to...</option>
-                                        <option value="wantToRead">Want to Read</option>
-                                        <option value="currentlyReading">Currently Reading</option>
-                                        <option value="alreadyRead">Read</option>
-                                        <option value="none">None</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div className="book-title">{book.title}</div>
-                                <div className="book-authors">{book.authors.join(', ')}</div>
-                                </div>
-                            </li>
-                            )
-                            :
-                            ''
-                        } 
+                        {/* add map script that renders all results books */ }     
                     </ol>
                 </div>
                 </div>
-
-
-
-                
           </div>
         )
     }
