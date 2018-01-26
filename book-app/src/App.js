@@ -13,7 +13,21 @@ class BooksApp extends React.Component {
   state = {
     currentlyReading: [],
     wantToRead: [],
-    alreadyRead: []
+    alreadyRead: [],
+    books: []
+  }
+
+  changeShelve = (event, title) => {
+    const shelveType = event.target.value;
+    console.log(shelveType);
+
+    if(shelveType === 'none' || shelveType === null || shelveType === undefined) return;
+
+    let choosenBook = this.state.books.filter((book) => book.title === title);
+    // need to remove from old shelve and put into the new shelve. 
+    this.setState((prevState) => {
+      return {[shelveType]: [...prevState[shelveType], choosenBook]}
+    });
   }
 
   componentDidMount() {
@@ -26,7 +40,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/search" render={() => (
-          <SearchComponent bookList={this.state.books} />
+          <SearchComponent bookList={this.state.books} handleChangeShelve={this.changeShelve}/>
         )}/>
         <Route exact path="/" render={() => (
           <div>
@@ -35,9 +49,9 @@ class BooksApp extends React.Component {
                 <h1>MyReads</h1>
               </div>
               <div className="list-books-content">
-                  <CurrentlyReadingComponent alreadyRead={this.state.currentlyReading} />
-                  <WantToReadComponent wantToRead={this.state.wantToRead} />
-                  <ReadComponent alreadyRead={this.state.alreadyRead} />
+                  <CurrentlyReadingComponent currentlyReading={this.state.currentlyReading} handleChangeShelve={this.changeShelve}/>
+                  <WantToReadComponent wantToRead={this.state.wantToRead} handleChangeShelve={this.changeShelve}/>
+                  <ReadComponent alreadyRead={this.state.alreadyRead} handleChangeShelve={this.changeShelve}/>
               </div>
             </div>
             <div className="open-search">

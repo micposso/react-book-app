@@ -16,14 +16,16 @@ class SearchComponent extends Component{
         })
     }
 
-    changeShelve = (event) => {
+    changeShelve = (event, title) => {
         event.persist();
         console.log(event.target.value);
-        this.setState({books: this.props.bookList.filter(book => book.title !== event.target.name)}, () => {
-        let newState = {};
-        newState[event.target.value] = this.props.bookList[event.target.value];
-        this.setState(newState);
-        });
+        let choosenBook = this.props.bookList.filter((book) => book.title !== title.title);
+        console.log(choosenBook);
+        
+        // send the return book to the target value state
+        //newState[event.target.value] = this.props.bookList[event.target.value];
+        //this.setState(newState);
+        //});
     }
 
     render() {
@@ -65,7 +67,7 @@ class SearchComponent extends Component{
                         <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
                             <div className="book-shelf-changer">
-                            <select name={book.title} onChange={this.changeShelve.bind(this)}>
+                            <select name={book.title} onChange={(e) => this.props.handleChangeShelve(e, book.title)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="wantToRead">Want to Read</option>
                                 <option value="currentlyReading">Currently Reading</option>
