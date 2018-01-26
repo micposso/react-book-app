@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import scapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
 
 
 class SearchComponent extends Component{
@@ -14,7 +16,16 @@ class SearchComponent extends Component{
         })
     }
 
+
+
     render() {
+        let showBooks
+        if (this.state.searchQuery) {
+            const titleMatch = new RegExp(scapeRegExp(this.state.searchQuery), 'i')
+            showBooks = this.props.bookList.filter((book) => titleMatch.test(book.name))
+        } else {
+            showBooks = this.props.bookList
+        }
         return(
             <div>
                 <div className="search-books">
@@ -39,8 +50,8 @@ class SearchComponent extends Component{
                     </div>
                 <div className="search-books-results">
                 <ol className="books-grid">
-                {this.props.bookList ?
-                this.props.bookList.map((book, index) => 
+                {showBooks ?
+                showBooks.map((book, index) => 
                     <li key={index}>
                         <div className="book">
                         <div className="book-top">
@@ -48,7 +59,7 @@ class SearchComponent extends Component{
                             <div className="book-shelf-changer">
                             <select name={book.title} onChange={(event) => {
                                 event.persist();
-                                this.setState({books: this.props.books.filter(book => book.title != event.target.name)}, () => {
+                                this.setState({books: this.props.books.filter(book => book.title !== event.target.name)}, () => {
                                 let newState = {};
                                 newState[event.target.value] = this.props[event.target.value].concat(book);
                                 this.setState(newState);
@@ -68,7 +79,7 @@ class SearchComponent extends Component{
                     </li>
                     )
                     :
-                    'No Books to display'
+                    'Your Search Did not Return Any Books'
                 } 
             </ol>
                 </div>
