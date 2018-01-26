@@ -16,13 +16,11 @@ class SearchComponent extends Component{
         })
     }
 
-
-
     render() {
         let showBooks
         if (this.state.searchQuery) {
             const titleMatch = new RegExp(scapeRegExp(this.state.searchQuery), 'i')
-            showBooks = this.props.bookList.filter((book) => titleMatch.test(book.name))
+            showBooks = this.props.bookList.filter((book) => titleMatch.test(book.title))
         } else {
             showBooks = this.props.bookList
         }
@@ -59,9 +57,9 @@ class SearchComponent extends Component{
                             <div className="book-shelf-changer">
                             <select name={book.title} onChange={(event) => {
                                 event.persist();
-                                this.setState({books: this.props.books.filter(book => book.title !== event.target.name)}, () => {
+                                this.setState({books: this.props.bookList.filter(book => book.title !== event.target.name)}, () => {
                                 let newState = {};
-                                newState[event.target.value] = this.props[event.target.value].concat(book);
+                                newState[event.target.value] = this.props.bookList[event.target.value];
                                 this.setState(newState);
                                 });
                             }}>
@@ -79,7 +77,7 @@ class SearchComponent extends Component{
                     </li>
                     )
                     :
-                    'Your Search Did not Return Any Books'
+                    'Your Search Did not Return Any Book'
                 } 
             </ol>
                 </div>
