@@ -18,21 +18,27 @@ class BooksApp extends React.Component {
   }
 
   changeShelve = (event, title) => {
+    //getting passed from the search component selection
     const shelveType = event.target.value;
     console.log(shelveType);
 
     if(shelveType === 'none' || shelveType === null || shelveType === undefined) return;
 
     let choosenBook = this.state.books.filter((book) => book.title === title);
-    // need to remove from old shelve and put into the new shelve. 
+    console.log(choosenBook);
+    // need to remove from old shelve and put into the new state
     this.setState((prevState) => {
-      return {[shelveType]: [...prevState[shelveType], choosenBook]}
+      if(shelveType === this.state[shelveType]) {
+        return {[shelveType]: [...prevState[shelveType], choosenBook]}
+      } else {
+        return {[shelveType]: ["maafds"]}
+      }
     });
   }
 
   componentDidMount() {
     BooksAPI.getAll()
-    .then(books => this.setState({books: books}))
+    .then(books => this.setState({ books }))
     .catch(err => console.log('this is an error in the book API', err))
   }
 

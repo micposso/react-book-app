@@ -16,18 +16,6 @@ class SearchComponent extends Component{
         })
     }
 
-    changeShelve = (event, title) => {
-        event.persist();
-        console.log(event.target.value);
-        let choosenBook = this.props.bookList.filter((book) => book.title !== title.title);
-        console.log(choosenBook);
-        
-        // send the return book to the target value state
-        //newState[event.target.value] = this.props.bookList[event.target.value];
-        //this.setState(newState);
-        //});
-    }
-
     render() {
         let showBooks
         if (this.state.searchQuery) {
