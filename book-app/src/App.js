@@ -28,11 +28,7 @@ class BooksApp extends React.Component {
     console.log(choosenBook);
     // need to remove from old shelve and put into the new state
     this.setState((prevState) => {
-      if(shelveType === this.state[shelveType]) {
-        return {[shelveType]: [...prevState[shelveType], choosenBook]}
-      } else {
-        return {[shelveType]: ["maafds"]}
-      }
+        return {[shelveType]: choosenBook}
     });
   }
 
@@ -55,9 +51,9 @@ class BooksApp extends React.Component {
                 <h1>MyReads</h1>
               </div>
               <div className="list-books-content">
-                  <CurrentlyReadingComponent currentlyReading={this.state.currentlyReading} handleChangeShelve={this.changeShelve}/>
-                  <WantToReadComponent wantToRead={this.state.wantToRead} handleChangeShelve={this.changeShelve}/>
-                  <ReadComponent alreadyRead={this.state.alreadyRead} handleChangeShelve={this.changeShelve}/>
+                  <CurrentlyReadingComponent bookList={this.state.books} currentlyReading={this.state.currentlyReading} handleChangeShelve={this.changeShelve}/>
+                  <WantToReadComponent bookList={this.state.books} wantToRead={this.state.wantToRead} handleChangeShelve={this.changeShelve}/>
+                  <ReadComponent bookList={this.state.books} alreadyRead={this.state.alreadyRead} handleChangeShelve={this.changeShelve}/>
               </div>
             </div>
             <div className="open-search">
