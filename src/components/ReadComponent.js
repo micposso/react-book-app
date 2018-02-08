@@ -7,8 +7,8 @@ class ReadComponent extends Component{
                 <h2 className="bookshelf-title">Read Books</h2>
                 <div className="bookshelf-books">        
                     <ol className="books-grid">
-                        {this.props.alreadyRead.length ?
-                        this.props.alreadyRead.map((book, index) => 
+                        {this.props.books.length ?
+                        this.props.books.map((book, index) => 
                         <li key={index}>
                             <div className="book">
                             <div className="book-top">
@@ -29,7 +29,7 @@ class ReadComponent extends Component{
                         </li>
                     )
                     :
-                    'You don\'t wanna read any book for now'
+                    <h2>{this.props.message}</h2>
                     }
                     </ol>
                 </div>
