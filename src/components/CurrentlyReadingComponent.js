@@ -7,8 +7,8 @@ class CurrentlyReadingComponent extends Component{
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">        
                     <ol className="books-grid">
-                        {this.props.currentlyReading.length ?
-                        this.props.currentlyReading.map((book, index) => 
+                        {this.props.books.length ?
+                        this.props.books.map((book, index) => 
                         <li key={index}>
                             <div className="book">
                             <div className="book-top">
@@ -29,7 +29,7 @@ class CurrentlyReadingComponent extends Component{
                         </li>
                     )
                     :
-                    'You don\'t wanna read any book for now'
+                    <h2>{this.props.message}</h2>
                     }
                     </ol>
                 </div>
