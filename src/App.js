@@ -15,8 +15,8 @@ class BooksApp extends React.Component {
     message: "You dont have any books on this shelf"
   }
 
-  changeShelve(book, shelve) {
-    BooksAPI.update(book, shelve).then(() => {
+  handleChangeShelve(book, shelf) {
+    BooksAPI.update(book, shelf).then(() => {
       BooksAPI.getAll().then((books) => {
         this.setState({ books });
       })
@@ -34,7 +34,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/search" render={() => (
-          <SearchComponent message={this.state.message} bookList={this.state.books} handleChangeShelve={this.changeShelve}/>
+          <SearchComponent message={this.state.message} bookList={this.state.books} handleChangeShelve={this.handleChangeShelve.bind(this)}/>
         )}/>
         <Route exact path="/" render={() => (
           <div>
