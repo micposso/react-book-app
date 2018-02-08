@@ -11,25 +11,18 @@ import './css/App.css'
 
 class BooksApp extends React.Component {
   state = {
-    currentlyReading: [],
-    wantToRead: [],
-    alreadyRead: [],
-    books: []
+    books: [],
+    message: "You dont have any books on this shelf"
   }
 
-  changeShelve = (event, title) => {
-    //getting passed from the search component selection
-    const shelveType = event.target.value;
-    console.log(shelveType);
+  handleChangeShelve(book, shelf) {
+    console.log(shelf)
+    BooksAPI.update(book, shelf).then(() => {
+      BooksAPI.getAll().then((books) => {
+        this.setState({ books });
+      })
+    })
 
-    if(shelveType === 'none' || shelveType === null || shelveType === undefined) return;
-
-    let choosenBook = this.state.books.filter((book) => book.title === title);
-    console.log(choosenBook);
-    // need to remove from old shelve and put into the new state
-    this.setState((prevState) => {
-        return {[shelveType]: choosenBook}
-    });
   }
 
   componentDidMount() {
@@ -42,7 +35,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/search" render={() => (
-          <SearchComponent bookList={this.state.books} handleChangeShelve={this.changeShelve}/>
+          <SearchComponent message={this.state.message} bookList={this.state.books} handleChangeShelve={this.handleChangeShelve.bind(this)}/>
         )}/>
         <Route exact path="/" render={() => (
           <div>
@@ -51,9 +44,9 @@ class BooksApp extends React.Component {
                 <h1>MyReads</h1>
               </div>
               <div className="list-books-content">
-                  <CurrentlyReadingComponent bookList={this.state.books} currentlyReading={this.state.currentlyReading} handleChangeShelve={this.changeShelve}/>
-                  <WantToReadComponent bookList={this.state.books} wantToRead={this.state.wantToRead} handleChangeShelve={this.changeShelve}/>
-                  <ReadComponent bookList={this.state.books} alreadyRead={this.state.alreadyRead} handleChangeShelve={this.changeShelve}/>
+                  <CurrentlyReadingComponent message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "currentlyReading")} />
+                  <WantToReadComponent message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "wantToRead")} />
+                  <ReadComponent message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "read")} />
               </div>
             </div>
             <div className="open-search">
