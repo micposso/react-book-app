@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-class CurrentlyReadingComponent extends Component{
+class BookShelfComponent extends Component{
     render(){
         return(
             <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
+                <h2 className="bookshelf-title">{this.props.headline}</h2>
                 <div className="bookshelf-books">        
                     <ol className="books-grid">
                         {this.props.books.length ?
@@ -39,4 +39,4 @@ class CurrentlyReadingComponent extends Component{
 }
 
 
-export default CurrentlyReadingComponent
+export default BookShelfComponent

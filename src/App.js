@@ -3,9 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
 import SearchComponent from './components/SearchComponent.js'
-import CurrentlyReadingComponent from './components/CurrentlyReadingComponent'
-import WantToReadComponent from './components/WantToReadComponent'
-import ReadComponent from './components/ReadComponent'
+import BookShelfComponent from './components/BookShelfComponent'
 import './css/App.css'
 //import { getAll } from './BooksAPI.js';
 
@@ -44,9 +42,9 @@ class BooksApp extends React.Component {
                 <h1>MyReads</h1>
               </div>
               <div className="list-books-content">
-                  <CurrentlyReadingComponent message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "currentlyReading")} />
-                  <WantToReadComponent message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "wantToRead")} />
-                  <ReadComponent message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "read")} />
+                  <BookShelfComponent headline={'Currently Reading'} message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "currentlyReading")} />
+                  <BookShelfComponent headline={'Want To Read'} message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "wantToRead")} />
+                  <BookShelfComponent headline={'Read Books'} message={this.state.message} handleChangeShelve={this.handleChangeShelve.bind(this)} books={this.state.books.filter( book => book.shelf === "read")} />
               </div>
             </div>
             <div className="open-search">
