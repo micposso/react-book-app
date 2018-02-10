@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-class CurrentlyReadingComponent extends Component{
+class BookShelfComponent extends Component{
     render(){
         return(
             <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
+                <h2 className="bookshelf-title">{this.props.headline}</h2>
                 <div className="bookshelf-books">        
                     <ol className="books-grid">
                         {this.props.books.length ?
@@ -14,7 +14,7 @@ class CurrentlyReadingComponent extends Component{
                             <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail})` }}></div>
                                 <div className="book-shelf-changer">
-                                <select onChange={(e) => this.props.handleChangeShelve(book, e.target.value)}>
+                                <select value={book.shelf} onChange={(e) => this.props.handleChangeShelve(book, e.target.value)}>
                                     <option value="none">Move to...</option>
                                     <option value="currentlyReading">Currently Reading</option>
                                     <option value="wantToRead">Want to Read</option>
@@ -39,4 +39,4 @@ class CurrentlyReadingComponent extends Component{
 }
 
 
-export default CurrentlyReadingComponent
+export default BookShelfComponent
