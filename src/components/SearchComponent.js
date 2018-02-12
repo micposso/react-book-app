@@ -14,10 +14,9 @@ class SearchComponent extends Component{
 
     updateSearch = (query) => {
         this.setState({
-            searchQuery: query.trim()
+            searchQuery: query
         });
         if ( query.length > 0 ) {
-            //make a api request, and filter the searchquery with all books to return a match and pass that to the displaybooks state
             BooksAPI.search(query, 20).then((searchedBooks) => {
                 const displayBooks = searchedBooks ? searchedBooks : [];
                 BooksAPI.getAll().then((books) => {
@@ -66,6 +65,8 @@ class SearchComponent extends Component{
                             </div>
                         </div>
                         <div className="book-title">{book.title}</div>
+                        <div className="book-authors">{book.authors}</div>
+
                         </div>
                     </li>
                     )
