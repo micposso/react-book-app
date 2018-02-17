@@ -19,15 +19,17 @@ class SearchComponent extends Component{
         if ( query.length > 0 ) {
             BooksAPI.search(query, 20).then((searchedBooks) => {
                 const displayBooks = searchedBooks ? searchedBooks : [];
-                BooksAPI.getAll().then((books) => {
+                const books = this.props.bookList;
                     for ( const displayBook of displayBooks) {
                         const shelfBook = books.find(book => book.id === displayBook.id )
                         if ( shelfBook ) {
                             displayBook.shelf = shelfBook.shelf;
+                        } else {
+                            
                         }
                     this.setState({ displayBooks });
                     }
-                })
+                
             })
         }
     }
