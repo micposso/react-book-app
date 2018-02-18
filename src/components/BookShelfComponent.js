@@ -23,8 +23,14 @@ class BookShelfComponent extends Component{
                                     </select>
                                     </div>
                                 </div>
+<<<<<<< HEAD
+                            </div>
+                            <div className="book-title">{book.title}</div>
+                            <div className="book-authors">{book.authors}</div>
+=======
                                 <div className="book-title">{book.title}</div>
                                 <div className="book-authors">{book.authors}</div>
+>>>>>>> 855c178a6358dddbb0dd08916f3e8f2ba33a6c7b
                             </div>
                         </li>
                     )

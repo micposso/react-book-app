@@ -9,7 +9,8 @@ class SearchComponent extends Component{
 
     state = {
         searchQuery: '',
-        displayBooks: []
+        displayBooks: [],
+        notFound: ''
     }
 
     updateSearch = (query) => {
@@ -19,6 +20,16 @@ class SearchComponent extends Component{
         if ( query.length > 0 ) {
             BooksAPI.search(query, 20).then((searchedBooks) => {
                 const displayBooks = searchedBooks ? searchedBooks : [];
+<<<<<<< HEAD
+                if ( searchedBooks.length > 0 ) {
+                    const books = this.props.bookList;
+                        for ( const displayBook of displayBooks) {
+                            const shelfBook = books.find(book => book.id === displayBook.id )
+                            if ( shelfBook ) {
+                                displayBook.shelf = shelfBook.shelf;
+                            }
+                            this.setState({ displayBooks });
+=======
                 BooksAPI.getAll().then((books) => {
                     for ( const displayBook of displayBooks) {
                         const shelfBook = books.find(book => book.id === displayBook.id )
@@ -26,12 +37,14 @@ class SearchComponent extends Component{
                             displayBook.shelf = shelfBook.shelf;
                         } else {
                             
+>>>>>>> 855c178a6358dddbb0dd08916f3e8f2ba33a6c7b
                         }
-                    this.setState({ displayBooks });
-                    }
-                })
+                } else {
+                    this.setState({ notFound: 'asdfad' })
+                }
+                
             })
-        }
+        }    
     }
 
     render() {
@@ -50,8 +63,9 @@ class SearchComponent extends Component{
                     </div>
                 <div className="search-books-results">
                 <ol className="books-grid">
-                {this.state.displayBooks ?
-                this.state.displayBooks.map((book, index) => 
+                <h2>{this.state.notFound}</h2>
+
+                { this.state.displayBooks.map((book, index) => 
                     <li key={index}>
                         <div className="book">
                             <div className="book-top">
@@ -66,14 +80,17 @@ class SearchComponent extends Component{
                                 </select>
                                 </div>
                             </div>
+<<<<<<< HEAD
+                        </div>
+                        <div className="book-title">{book.title}</div>
+                        <div className="book-authors">{book.authors}</div>
+=======
                             <div className="book-title">{book.title}</div>
                             <div className="book-authors">{book.authors}</div>
+>>>>>>> 855c178a6358dddbb0dd08916f3e8f2ba33a6c7b
                         </div>
                     </li>
-                    )
-                    :
-                    <h2>{this.props.message}</h2>
-                } 
+                )}
             </ol>
                 </div>
                 </div>
