@@ -20,7 +20,6 @@ class SearchComponent extends Component{
         if ( query.length > 0 ) {
             BooksAPI.search(query, 20).then((searchedBooks) => {
                 const displayBooks = searchedBooks ? searchedBooks : [];
-<<<<<<< HEAD
                 if ( searchedBooks.length > 0 ) {
                     const books = this.props.bookList;
                         for ( const displayBook of displayBooks) {
@@ -29,15 +28,6 @@ class SearchComponent extends Component{
                                 displayBook.shelf = shelfBook.shelf;
                             }
                             this.setState({ displayBooks });
-=======
-                BooksAPI.getAll().then((books) => {
-                    for ( const displayBook of displayBooks) {
-                        const shelfBook = books.find(book => book.id === displayBook.id )
-                        if ( shelfBook ) {
-                            displayBook.shelf = shelfBook.shelf;
-                        } else {
-                            
->>>>>>> 855c178a6358dddbb0dd08916f3e8f2ba33a6c7b
                         }
                 } else {
                     this.setState({ notFound: 'asdfad' })
@@ -80,15 +70,9 @@ class SearchComponent extends Component{
                                 </select>
                                 </div>
                             </div>
-<<<<<<< HEAD
                         </div>
                         <div className="book-title">{book.title}</div>
                         <div className="book-authors">{book.authors}</div>
-=======
-                            <div className="book-title">{book.title}</div>
-                            <div className="book-authors">{book.authors}</div>
->>>>>>> 855c178a6358dddbb0dd08916f3e8f2ba33a6c7b
-                        </div>
                     </li>
                 )}
             </ol>
