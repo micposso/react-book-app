@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as BooksAPI from '../BooksAPI'
 import { Link } from 'react-router-dom'
 import scapeRegExp from 'escape-string-regexp'
+import { DebounceInput } from 'react-debounce-input'
 import sortBy from 'sort-by'
 
 
@@ -10,21 +11,16 @@ class SearchComponent extends Component{
     state = {
         searchQuery: '',
         displayBooks: [],
-        notFound: ''
     }
 
     updateSearch = (query) => {
-        this.setState({
-            searchQuery: query
-        });
-        if ( query.length > 0 ) {
+
+        if ( query.length >= 0 ) {
+            this.setState({
+                searchQuery: query
+            });
             BooksAPI.search(query, 20).then((searchedBooks) => {
                 const displayBooks = searchedBooks ? searchedBooks : [];
-                if ( this.state.displayBooks.length == 0 ) {
-                    this.setState({ notFound: 'Your Search did not return any results' })
-                } else {
-                    this.setState({ notFound: '' })
-                }
                 if ( searchedBooks.length > 0 ) {
                     const books = this.props.bookList;
                         for ( const displayBook of displayBooks) {
@@ -37,7 +33,12 @@ class SearchComponent extends Component{
                 }
                 
             })
-        }    
+        } else {
+            this.setState({
+                displayBooks: []
+            });
+        }
+
     }
 
     render() {
@@ -47,7 +48,8 @@ class SearchComponent extends Component{
                     <div className="search-books-bar">
                         <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
-                            <input 
+                            <DebounceInput
+                                debounceTimeout={300} 
                                 type="text"
                                 value={this.state.searchQuery}
                                 onChange={(event) => this.updateSearch(event.target.value)}
@@ -57,7 +59,8 @@ class SearchComponent extends Component{
                 <div className="search-books-results">
                 <ol className="books-grid">
                 <h2>{this.state.notFound}</h2>
-                {this.state.displayBooks.map((book, index) => 
+                { this.state.displayBooks ? 
+                this.state.displayBooks.map((book, index) => 
                 <li key={index}>
                     <div className="book">
                         <div className="book-top">
@@ -76,7 +79,10 @@ class SearchComponent extends Component{
                     <div className="book-title">{book.title}</div>
                     <div className="book-authors">{book.authors}</div>
                 </li>
-                )}
+                ) : <h2>Type a search term to display books</h2> }
+
+
+         
             </ol>
                 </div>
                 </div>
