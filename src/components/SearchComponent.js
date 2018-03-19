@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as BooksAPI from '../BooksAPI'
 import { Link } from 'react-router-dom'
 import scapeRegExp from 'escape-string-regexp'
+import { DebounceInput } from 'react-debounce-input'
 import sortBy from 'sort-by'
 
 
@@ -47,7 +48,8 @@ class SearchComponent extends Component{
                     <div className="search-books-bar">
                         <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
-                            <input 
+                            <DebounceInput
+                                debounceTimeout={300} 
                                 type="text"
                                 value={this.state.searchQuery}
                                 onChange={(event) => this.updateSearch(event.target.value)}
