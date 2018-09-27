@@ -132,6 +132,15 @@ body,
     padding: 10px 15px;
     text-align: left;
     width: 185px;
+    float: left;
+    opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.book-grid-fade {
+    opacity: 0.5;
 }
 
 .book {
