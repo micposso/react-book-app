@@ -21,7 +21,7 @@ class SearchComponent extends Component{
             });
             BooksAPI.search(query, 20).then((searchedBooks) => {
                 const displayBooks = searchedBooks ? searchedBooks : [];
-                if ( searchedBooks.length > 0 ) {
+                if ( searchedBooks && searchedBooks.length > 0 ) {
                     const books = this.props.bookList;
                         for ( const displayBook of displayBooks) {
                             const shelfBook = books.find(book => book.id === displayBook.id )
@@ -30,15 +30,14 @@ class SearchComponent extends Component{
                             }
                             this.setState({ displayBooks });
                         }
+                } else {
+                  this.setState({
+                      displayBooks: []
+                  });
                 }
                 
             })
-        } else {
-            this.setState({
-                displayBooks: []
-            });
-        }
-
+        } 
     }
 
     render() {
