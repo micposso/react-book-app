@@ -50,6 +50,7 @@ class SearchComponent extends Component{
                             <DebounceInput
                                 debounceTimeout={300} 
                                 type="text"
+                                placeholder="Enter search word"
                                 value={this.state.searchQuery}
                                 onChange={(event) => this.updateSearch(event.target.value)}
                             />
