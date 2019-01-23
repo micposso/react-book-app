@@ -65,8 +65,10 @@ class SearchComponent extends Component{
                         <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail})` }}></div>
                             <div className="book-shelf-changer">
-                            <select onChange={(e) => this.props.handleChangeShelve(book, e.target.value)}>
-                                <option>Move to...</option>
+                            <select 
+                                defaultValue={book.shelf || 'none'}
+                                onChange={(e) => this.props.handleChangeShelve(book, e.target.value)}>
+                                <option disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>
