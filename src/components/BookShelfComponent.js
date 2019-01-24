@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import BookComponent from './BookComponent.js'
 
 const BookShelfComponent = (props) => {
