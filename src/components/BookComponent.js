@@ -1,10 +1,5 @@
 import React, { Component } from "react";
 
-class BookComponent extends Component {
-  componentWillReceiveProps() {
-    console.log("book component moved");
-  }
-
   render() {
     return (
       <div>
