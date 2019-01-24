@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+class BookComponent extends Component {	
   render() {
     return (
       <div>

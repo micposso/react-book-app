@@ -1,3 +1,4 @@
+import React, { Component } from "react";
 import BookComponent from './BookComponent.js'
 
 const BookShelfComponent = (props) => {
@@ -9,7 +10,6 @@ const BookShelfComponent = (props) => {
                 <ol className="books-grid">
                     <BookComponent books={props.books} handleChangeShelve={props.handleChangeShelve} />
                 </ol> : <h3>{props.message}</h3>
-
             }
         </div>
     </div>
